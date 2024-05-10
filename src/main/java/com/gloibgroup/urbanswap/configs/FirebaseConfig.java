@@ -1,4 +1,4 @@
-package com.gloibgroup.urbanswap.config;
+package com.gloibgroup.urbanswap.configs;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
