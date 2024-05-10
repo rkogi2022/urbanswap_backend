@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: ${URBAN_SWAP_DB_NAME}
+      POSTGRES_USER: ${URBAN_SWAP_DB_USER}
+      POSTGRES_PASSWORD: ${URBAN_SWAP_DB_PASSWORD}
