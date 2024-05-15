@@ -6,11 +6,11 @@ This is the backend api for Urban Swap, a green mobility ride hailing applicatio
 
 ## Technologies Used
 
-1. Spring Boot: 
-2. PostgreSQL: An open-source relational database system.
-3. Docker Compose: A tool for defining and running multi-container Docker applications.
-4. Flyway: A database migration tool that allows version control over database changes.
-5. Firebase Authentication: A service provided by Google to authenticate users using only client-side code.
+1. [Spring Boot](https://spring.io/projects/spring-boot) 
+2. [PostgreSQL](https://www.postgresql.org/docs/): An open-source relational database system.
+3. [Docker Compose](https://docs.docker.com/compose/): A tool for defining and running multi-container Docker applications.
+4. [Flyway](https://flywaydb.org/): A database migration tool that allows version control over database changes.
+5. [Firebase Authentication](https://firebase.google.com/docs/auth): A service provided by Google to authenticate users using only client-side code.
 
 ## Prerequisites
 
@@ -36,13 +36,17 @@ This is the backend api for Urban Swap, a green mobility ride hailing applicatio
       1. Application environment variables 
          1. Option 1: System environment variables
    
-         You can choose to place the above environment vairables in the `/etc/environment` file. 
+              You can choose to place the above environment vairables in the `/etc/environment` file. 
+   
          2. Option 2: Run from IntelliJ IDEA 
+         
             1. Create a file (eg. urban-swap-dev-env-vars.txt) anywhere in your machine and take note of its path. Place in it the above configurations.
+            
             2. Edit configurations > Environment variables. Set it as the above file path.
+            
       2. Database environment variables 
-
-   Create a `.env` file in the root project directory and add the following configurations (replace [FILLIN] with your configs):
+         
+Create a `.env` file in the root project directory and add the following configurations (replace [FILLIN] with your configs):
 
     ```
        URBAN_SWAP_DB_HOST=localhost
@@ -64,8 +68,30 @@ This is the backend api for Urban Swap, a green mobility ride hailing applicatio
 
 #  Contributing
 1. Clone repository
+    ```bash
+    git clone git@github.com:GloibGroup/urban-swap-backend.git
+    ```
 2. Change to the `development` branch
-3. Create your working branch off this branch
-4. Push your working branch
-5. Create a pull request against the base branch (`development).
-6. Give a summary of what changes your working branch introduces. 
+    ```bash
+    cd /urban-swap-backend
+    ```
+3. Create a new feature branch off this branch
+    ```bash
+    git checkout -b feature-example
+    ```
+4. Make your changes and commit them.
+5. Pull the latest changes from the `development` branch and merge them into your working branch.
+    ```bash
+    git checkout development
+    git pull origin development
+    git checkout feature-example
+    git merge development
+    ```
+6. Resolve any merge conflicts that you may have, then push your feature branch
+    ```bash
+    git push origin feature-example
+    ```
+7. Create a pull request against the base branch (`development`).
+8. Give a summary of what changes your working branch introduces. 
+
+See [example pull request](https://github.com/GloibGroup/urban-swap-backend/pull/2).
