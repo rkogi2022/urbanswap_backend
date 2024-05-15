@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Ignore secret configs ###
+src/main/resources/firebaseServiceAccountKey.json
+flyway.conf
+.env
