@@ -26,7 +26,7 @@ public class SecurityConfig {
 
     private AntPathRequestMatcher[] getPermittedPathRequestMatchers() {
         return new AntPathRequestMatcher[] {
-                new AntPathRequestMatcher("/auth/**"),
+//                new AntPathRequestMatcher("/auth/**"),
         };
     }
 
