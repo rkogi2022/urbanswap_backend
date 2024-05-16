@@ -3,12 +3,6 @@ package com.gloibgroup.urbanswap.services;
 import com.gloibgroup.urbanswap.dtos.requests.CustomerSignupDTO;
 import com.gloibgroup.urbanswap.models.Customer;
 import com.gloibgroup.urbanswap.repositories.CustomerRepository;
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.cloud.FirestoreClient;
-import com.google.firebase.remoteconfig.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class CustomerService {
@@ -64,7 +57,7 @@ public class CustomerService {
         customer.setPhoneNumber(customerSignupDTO.getPhoneNumber());
         customer.setFirstName(customerSignupDTO.getFirstName());
         customer.setLastName(customerSignupDTO.getLastName());
-        customer.setFirebaseAuthId(customerSignupDTO.getFirebaseAuthId());
+        customer.setFirebaseUID(customerSignupDTO.getFirebaseUID());
         return customer;
     }
 
@@ -72,11 +65,13 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer findCustomerById(String uid) {
-        Optional<Customer> customerOptional = customerRepository.findById(uid);
+    public Customer findCustomerById(String customerID) {
+        Optional<Customer> customerOptional = customerRepository.findById(customerID);
         if (customerOptional.isPresent()) {
+            logger.info("Found customer with ID {}", customerID);
             return customerOptional.get();
         } else {
+            logger.warn("Customer with ID {} not found", customerID);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer record not found");
         }
     }

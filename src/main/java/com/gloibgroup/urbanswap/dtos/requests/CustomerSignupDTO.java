@@ -20,6 +20,6 @@ public class CustomerSignupDTO {
     private String firstName;
     @NotBlank(message = "Last name must be present")
     private String lastName;
-    @NotBlank(message = "Firebase auth ID must be present")
-    private String firebaseAuthId;
+    @NotBlank(message = "Firebase UID must be present")
+    private String firebaseUID;
 }

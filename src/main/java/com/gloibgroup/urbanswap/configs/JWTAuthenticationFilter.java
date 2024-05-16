@@ -21,6 +21,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             try {
                 FirebaseAuth.getInstance().verifyIdToken(token);
             } catch (Exception e) {
+                logger.error("Failed token verification {}", e);
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid authentication credentials");
             }
         }

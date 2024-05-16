@@ -35,3 +35,6 @@ build/
 ### Ignore secret configs ###
 src/main/resources/firebaseServiceAccountKey.json
 .env
+
+### Ignore log file
+urban-swap.log
