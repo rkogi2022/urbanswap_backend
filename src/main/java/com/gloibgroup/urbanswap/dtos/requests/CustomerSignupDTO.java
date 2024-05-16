@@ -1,5 +1,6 @@
 package com.gloibgroup.urbanswap.dtos.requests;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -19,4 +20,6 @@ public class CustomerSignupDTO {
     private String firstName;
     @NotBlank(message = "Last name must be present")
     private String lastName;
+    @NotBlank(message = "Firebase auth ID must be present")
+    private String firebaseAuthId;
 }

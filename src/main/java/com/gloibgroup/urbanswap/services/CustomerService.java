@@ -38,8 +38,7 @@ public class CustomerService {
 
         try {
             saveToPrimaryDatabase(customer);
-            saveToFirestore(customer);
-            logger.info("Customer id {} signed up successfully: ", customer.getId());
+            logger.info("Customer ID {} signed up successfully: ", customer.getId());
         } catch (Exception e) {
             logger.error("Could not save customer record: {}", e.getMessage(), e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to sign up customer");
@@ -54,20 +53,6 @@ public class CustomerService {
         }
     }
 
-    private static void saveToFirestore(Customer customer) {
-        Firestore db = FirestoreClient.getFirestore();
-        DocumentReference docRef = db.collection("customers").document(customer.getId());
-        ApiFuture<WriteResult> result = docRef.set(customer);
-
-        try {
-            WriteResult writeResult = result.get();
-            logger.info("Customer id {} saved to Firestore at {}", customer.getId(), writeResult.getUpdateTime());
-        } catch (InterruptedException | ExecutionException e) {
-            logger.error("Could not save customer id {} to Firestore", customer.getId(), e);
-            throw new RuntimeException("Error saving customer to Firestore", e);
-        }
-    }
-
     private void saveToPrimaryDatabase(Customer customer) {
         customerRepository.save(customer);
     }
@@ -79,6 +64,7 @@ public class CustomerService {
         customer.setPhoneNumber(customerSignupDTO.getPhoneNumber());
         customer.setFirstName(customerSignupDTO.getFirstName());
         customer.setLastName(customerSignupDTO.getLastName());
+        customer.setFirebaseAuthId(customerSignupDTO.getFirebaseAuthId());
         return customer;
     }
 

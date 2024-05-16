@@ -34,4 +34,8 @@ public class Customer {
 
     @NotBlank(message = "Last name must be present")
     private String lastName;
+
+    @NotBlank(message = "Firebase auth ID must be present")
+    @Column(unique = true)
+    private String firebaseAuthId;
 }
