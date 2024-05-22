@@ -1,15 +1,14 @@
 package com.gloibgroup.urbanswap.models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -18,7 +17,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "customers")
 public class Customer {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @NotBlank(message = "Phone number must be present")
     @Column(unique = true)
@@ -35,7 +35,7 @@ public class Customer {
     @NotBlank(message = "Last name must be present")
     private String lastName;
 
-    @NotBlank(message = "Firebase auth ID must be present")
-    @Column(unique = true)
-    private String firebaseAuthId;
+    @NotBlank(message = "Firebase auth UID must be present")
+    @Column(name = "firebase_uid", unique = true)
+    private String firebaseUID;
 }

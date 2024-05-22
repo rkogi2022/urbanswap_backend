@@ -11,9 +11,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 @Validated
 public class CustomersController {
     private final CustomerService customersService;
@@ -33,6 +34,13 @@ public class CustomersController {
     public ResponseEntity<ApiResponse<List<Customer>>> fetchCustomers() {
         List<Customer> customers = customersService.fetchCustomers();
         ApiResponse<List<Customer>> apiResponse = new ApiResponse<>("success", HttpStatus.OK.value(), customers);
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @GetMapping("/{customerID}")
+    public ResponseEntity<ApiResponse<Customer>> fetchCustomer(@PathVariable UUID customerID) {
+        Customer customer = customersService.findCustomerById(customerID);
+        ApiResponse<Customer> apiResponse = new ApiResponse<>("success", HttpStatus.OK.value(), customer);
         return ResponseEntity.ok(apiResponse);
     }
 }
