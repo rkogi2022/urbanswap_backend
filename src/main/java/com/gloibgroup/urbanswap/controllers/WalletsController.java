@@ -9,12 +9,12 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/wallets")
-public class WalletController {
+public class WalletsController {
 
     private final WalletService walletService;
 
     @Autowired
-    public WalletController(WalletService walletService) {
+    public WalletsController(WalletService walletService) {
         this.walletService = walletService;
     }
 
