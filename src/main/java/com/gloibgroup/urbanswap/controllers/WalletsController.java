@@ -1,8 +1,11 @@
 package com.gloibgroup.urbanswap.controllers;
 
+import com.gloibgroup.urbanswap.dtos.payloads.ApiResponse;
 import com.gloibgroup.urbanswap.models.Wallet;
 import com.gloibgroup.urbanswap.services.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -19,8 +22,10 @@ public class WalletsController {
     }
 
     @PostMapping
-    public Wallet createWallet(@RequestBody Wallet wallet) {
-        return walletService.createWallet(wallet);
+    public ResponseEntity<ApiResponse<Wallet>> createWallet(@RequestBody Wallet wallet) {
+        Wallet wallet1 = walletService.createWallet(wallet);
+        ApiResponse<Wallet> apiResponse = new ApiResponse<>("success", HttpStatus.OK.value(), wallet1);
+        return ResponseEntity.ok(apiResponse);
     }
 
     @GetMapping("/{walletId}/balance")
