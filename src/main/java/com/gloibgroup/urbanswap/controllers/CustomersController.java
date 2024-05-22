@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -37,7 +38,7 @@ public class CustomersController {
     }
 
     @GetMapping("/{customerID}")
-    public ResponseEntity<ApiResponse<Customer>> fetchCustomer(@PathVariable String customerID) {
+    public ResponseEntity<ApiResponse<Customer>> fetchCustomer(@PathVariable UUID customerID) {
         Customer customer = customersService.findCustomerById(customerID);
         ApiResponse<Customer> apiResponse = new ApiResponse<>("success", HttpStatus.OK.value(), customer);
         return ResponseEntity.ok(apiResponse);

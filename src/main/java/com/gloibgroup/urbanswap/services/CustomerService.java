@@ -52,7 +52,6 @@ public class CustomerService {
 
     private Customer createCustomerFromDto(CustomerSignupDTO customerSignupDTO) {
         Customer customer = new Customer();
-        customer.setId(String.valueOf(UUID.randomUUID()));
         customer.setEmail(customerSignupDTO.getEmail());
         customer.setPhoneNumber(customerSignupDTO.getPhoneNumber());
         customer.setFirstName(customerSignupDTO.getFirstName());
@@ -65,7 +64,7 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer findCustomerById(String customerID) {
+    public Customer findCustomerById(UUID customerID) {
         Optional<Customer> customerOptional = customerRepository.findById(customerID);
         if (customerOptional.isPresent()) {
             logger.info("Found customer with ID {}", customerID);
