@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Service
 public class WalletService {
@@ -17,18 +18,18 @@ public class WalletService {
         this.walletRepository = walletRepository;
     }
 
-    public BigDecimal checkWalletBalance(String walletId) {
+    public BigDecimal checkWalletBalance(UUID walletId) {
         Wallet wallet = walletRepository.findById(walletId).orElseThrow(() -> new RuntimeException("Wallet not found"));
         return wallet.getBalance();
     }
 
-    public void loadWalletFromMobileMoney(String walletId, BigDecimal amount) {
+    public void loadWalletFromMobileMoney(UUID walletId, BigDecimal amount) {
         Wallet wallet = walletRepository.findById(walletId).orElseThrow(() -> new RuntimeException("Wallet not found"));
         wallet.setBalance(wallet.getBalance().add(amount));
         walletRepository.save(wallet);
     }
 
-    public void transferToMobileMoney(String walletId, BigDecimal amount) {
+    public void transferToMobileMoney(UUID walletId, BigDecimal amount) {
         Wallet wallet = walletRepository.findById(walletId).orElseThrow(() -> new RuntimeException("Wallet not found"));
         if (wallet.getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("Insufficient balance");

@@ -1,10 +1,7 @@
 package com.gloibgroup.urbanswap.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -15,12 +12,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "wallets")
 public class Wallet {
-
     @Id
-    private String id = UUID.randomUUID().toString();
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
     @Column(name = "user_id")
     private String userId;
-    private BigDecimal balance;
 
-    // Add any required constructors, if needed
+    private BigDecimal balance;
 }

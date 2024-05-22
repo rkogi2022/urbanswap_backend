@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/wallets")
@@ -29,17 +30,17 @@ public class WalletsController {
     }
 
     @GetMapping("/{walletId}/balance")
-    public BigDecimal checkWalletBalance(@PathVariable String walletId) {
+    public BigDecimal checkWalletBalance(@PathVariable UUID walletId) {
         return walletService.checkWalletBalance(walletId);
     }
 
     @PatchMapping("/{walletId}/load")
-    public void loadWalletFromMobileMoney(@PathVariable String walletId, @RequestParam BigDecimal amount) {
+    public void loadWalletFromMobileMoney(@PathVariable UUID walletId, @RequestParam BigDecimal amount) {
         walletService.loadWalletFromMobileMoney(walletId, amount);
     }
 
     @PostMapping("/{walletId}/transfer")
-    public void transferToMobileMoney(@PathVariable String walletId, @RequestParam BigDecimal amount) {
+    public void transferToMobileMoney(@PathVariable UUID walletId, @RequestParam BigDecimal amount) {
         walletService.transferToMobileMoney(walletId, amount);
     }
 }
